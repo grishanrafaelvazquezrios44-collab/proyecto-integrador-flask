@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CineFlix</title>
+    <link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+<main class="panel">
+    <h1>🎬 CineFlix</h1>
+    <p>Formulario de reservación de películas</p>
+
+    <form method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Película:</label>
+        <select name="pelicula" required>
+            <option value="">Selecciona una película</option>
+            <option>Intensamente 2</option>
+            <option>Coco</option>
+            <option>Elementos</option>
+            <option>Robot salvaje</option>
+        </select>
+
+        <label>Fecha:</label>
+        <input type="date" name="fecha" required>
+
+        <label>Horario:</label>
+        <select name="horario" required>
+            <option value="">Selecciona</option>
+            <option value="14:00">14:00</option>
+            <option value="17:00">17:00</option>
+            <option value="20:00">20:00</option>
+        </select>
+
+        <label>Boletos:</label>
+        <input type="number" name="boletos" min="1" max="10" required>
+
+        <label>Sala:</label>
+        <select name="sala" required>
+            <option value="">Selecciona</option>
+            <option>Tradicional</option>
+            <option>VIP</option>
+            <option>3D</option>
+        </select>
+
+        <button type="submit">Guardar reservación</button>
+    </form>
+
+    {% with ms = get_flashed_messages(with_categories=true) %}
+        {% for tipo, mensaje in ms %}
+            <p class="{{ tipo }}">{{ mensaje }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <a href="/cineflix/respuestas">Ver reservaciones</a>
+    <br><br>
+    <a href="/">Volver al inicio</a>
+</main>
+</body>
+              </html>
+              
