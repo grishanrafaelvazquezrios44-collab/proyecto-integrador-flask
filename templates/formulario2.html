@@ -3,43 +3,39 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Buzón de sugerencias</title>
-    <link rel="stylesheet" href="/static/estilos.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
 </head>
 <body>
-<main class="panel">
-    <h1>💡 Buzón de sugerencias</h1>
-    <p>Ayúdanos a mejorar CineFlix.</p>
+    <div class="contenedor">
+        <h1>💡 Buzón de sugerencias</h1>
 
-    <form method="POST">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required>
+        {% with mensajes = get_flashed_messages() %}
+            {% for mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endwith %}
 
-        <label>Categoría:</label>
-        <select name="categoria" required>
-            <option value="">Selecciona</option>
-            <option>Servicio</option>
-            <option>Diseño</option>
-            <option>Contenido</option>
-            <option>Otro</option>
-        </select>
+        <form method="POST">
+            <input type="text" name="nombre" placeholder="Nombre" required>
 
-        <label>Escribe tu sugerencia:</label>
-        <textarea name="sugerencia" required></textarea>
+            <select name="categoria" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Películas">Películas</option>
+                <option value="Instalaciones">Instalaciones</option>
+                <option value="Servicio">Servicio</option>
+                <option value="Otros">Otros</option>
+            </select>
 
-        <button type="submit">Enviar sugerencia</button>
-    </form>
+            <textarea name="sugerencia" placeholder="Escribe tu sugerencia" required></textarea>
 
-    {% with ms = get_flashed_messages(with_categories=true) %}
-        {% for tipo, mensaje in ms %}
-            <p class="{{ tipo }}">{{ mensaje }}</p>
-        {% endfor %}
-    {% endwith %}
+            <button type="submit">Enviar sugerencia</button>
+        </form>
 
-    <a href="/formulario2/respuestas">Ver sugerencias</a>
-    <br><br>
-    <a href="/">Volver al inicio</a>
-</main>
+        <a href="/formulario2/respuestas">Ver sugerencias</a>
+        <br><a href="/">Volver al inicio</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
