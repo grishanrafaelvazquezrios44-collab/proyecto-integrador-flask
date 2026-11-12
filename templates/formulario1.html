@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Encuesta de satisfacción</title>
+    <link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+<main class="panel">
+    <h1>⭐ Encuesta de satisfacción</h1>
+    <p>Cuéntanos tu experiencia en CineFlix.</p>
+
+    <form method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Calificación:</label>
+        <select name="calificacion" required>
+            <option value="">Selecciona</option>
+            <option value="5">5 - Excelente</option>
+            <option value="4">4 - Muy bien</option>
+            <option value="3">3 - Bien</option>
+            <option value="2">2 - Regular</option>
+            <option value="1">1 - Puede mejorar</option>
+        </select>
+
+        <label>Opinión:</label>
+        <textarea name="opinion" required></textarea>
+
+        <button type="submit">Enviar encuesta</button>
+    </form>
+
+    {% with ms = get_flashed_messages(with_categories=true) %}
+        {% for tipo, mensaje in ms %}
+            <p class="{{ tipo }}">{{ mensaje }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <a href="/formulario1/respuestas">Ver respuestas</a>
+    <br><br>
+    <a href="/">Volver al inicio</a>
+</main>
+</body>
+</html>
